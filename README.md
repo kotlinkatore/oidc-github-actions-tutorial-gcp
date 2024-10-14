@@ -4,6 +4,10 @@
 
 ![alt text](image-2.png)
 
+![alt text](image-3.png)
+
+
+
 The command you provided, `gcloud iam workload-identity-pools providers describe github --workload-identity-pool="github-demo-pool" --location="global"`, describes a workload identity pool provider named "github" within the "github-demo-pool" located in the global region.
 
 Here's a breakdown of what the command does:
@@ -23,3 +27,8 @@ The output you received shows the details of the "github" provider. Let's break 
 * **`state`**: This indicates the current state of the provider. In this case, it's "ACTIVE," meaning the provider is ready to be used for mapping external identities.
 
 In simpler terms, this workload identity pool provider allows Google Cloud to securely connect with users accessing a specific GitHub repository (`kotlinkatore/oidc-github-actions-tutorial-gcp`) through GitHub Actions. By mapping the user information from the GitHub Actions token, Google Cloud can grant appropriate permissions based on the user's role within the repository.
+
+service account
+![alt text](image-4.png)
+
+![alt text](image-5.png)

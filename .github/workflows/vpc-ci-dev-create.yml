@@ -27,10 +27,10 @@ jobs:
         id: auth
         uses: google-github-actions/auth@v1
         with:
-          # Value from command: gcloud iam workload-identity-pools providers describe github-actions --workload-identity-pool="github-actions-pool" --location="global"
-          workload_identity_provider: ""
+          # Value from command: gcloud iam workload-identity-pools providers describe [oicd ID given in WIF] --workload-identity-pool="[Provider ID ]" --location="global"
+          workload_identity_provider: "projects/764560914203/locations/global/workloadIdentityPools/github-demo-pool/providers/github"
           create_credentials_file: true
-          service_account: "github-actions-sa@iam-oidc-provider-demo.iam.gserviceaccount.com"
+          service_account: "gifide@iam-oidc-provider-demo-438612.iam.gserviceaccount.com"
           token_format: "access_token"
           access_token_lifetime: "120s"
       - name: Echo stuff
