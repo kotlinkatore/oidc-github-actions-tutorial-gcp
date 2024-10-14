@@ -31,4 +31,14 @@ In simpler terms, this workload identity pool provider allows Google Cloud to se
 service account
 ![alt text](image-4.png)
 
+binding, 
+```
+gcloud iam service-accounts add-iam-policy-binding \
+"king-529@iam-oidc-provider-demo-438612.iam.gserviceaccount.com" \
+--project="iam-oidc-provider-demo-438612" \
+--role="roles/iam.workloadIdentityUser" \
+--member="principal://iam.googleapis.com/projects/764560914203/locations/global/workloadIdentityPools/github-demo-pool/subject/SUBJECT_ATTRIBUTE_VALUE"
+```
+![alt text](image-6.png)
+
 ![alt text](image-5.png)
