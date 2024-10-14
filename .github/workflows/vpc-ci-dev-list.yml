@@ -1,0 +1,47 @@
+name: vpc-ci-dev-list
+on:
+  workflow_dispatch
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - "iac/terraform/vpc/*"
+  #     - "iac/terraform/vpc/dev/**"
+defaults:
+  run:
+    shell: bash
+    working-directory: ./iac/terraform/vpc
+permissions:
+  contents: read
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint. New
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+      - name: Configure GCP credentials
+        id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          # Value from command: gcloud iam workload-identity-pools providers describe github-actions --workload-identity-pool="github-actions-pool" --location="global"
+          workload_identity_provider: ""
+          # create_credentials_file: true
+          service_account: "github-actions-sa@iam-oidc-provider-demo.iam.gserviceaccount.com"
+          token_format: "access_token"
+          access_token_lifetime: "120s"
+      - name: Echo stuff
+        run: printenv
+      - name: Setup GCloud SDK
+        uses: "google-github-actions/setup-gcloud@v1"
+        with:
+          version: ">= 363.0.0"
+      - name: List Compute Networks
+        run: |-
+          echo "Displaying networks"
+          gcloud compute networks list
+          echo "Displaying subnets for my-awesome-vpc-network network"
+          gcloud compute networks subnets list --network my-awesome-vpc-network
